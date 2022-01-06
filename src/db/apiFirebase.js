@@ -23,6 +23,25 @@ const agregarDatos = async (tarea) => {
     console.log(error);
   }
 };
-const apiFirebase = { obtenerDatos, agregarDatos };
+
+const eliminarDatos = async (id) => {
+  try {
+    const db = firebase.firestore();
+    const data = await db.collection("tareas").doc(id).delete();
+  } catch (error) {
+    console.log(error);
+  }
+};
+const editarDatos = async (id, tarea) => {
+  try {
+    const db = firebase.firestore();
+    const data = await db.collection("tareas").doc(id).update({
+      name: tarea,
+    });
+  } catch (error) {
+    console.log(error);
+  }
+}
+const apiFirebase = { obtenerDatos, agregarDatos, eliminarDatos, editarDatos };
 
 export default apiFirebase;
