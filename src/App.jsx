@@ -7,6 +7,7 @@ const App = () => {
 
   const getData = async () => {
     setdata(await apiFirebase.obtenerDatos());
+   
   };
 
   const addTarea = async (e) => {
@@ -43,7 +44,7 @@ const App = () => {
             </thead>
             <tbody>
               {data.map((item, index) => (
-                <tr>
+                <tr key={item.id}>
                   <th scope="row">{index + 1}</th>
                   <td>{item.name}</td>
                 </tr>
