@@ -41,7 +41,7 @@ const editarDatos = async (id, tarea) => {
   } catch (error) {
     console.log(error);
   }
-}
+};
 const apiFirebase = { obtenerDatos, agregarDatos, eliminarDatos, editarDatos };
 
 export default apiFirebase;
