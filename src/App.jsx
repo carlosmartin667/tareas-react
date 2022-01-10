@@ -1,18 +1,31 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Login from "./Components/Login";
 import Navbar from "./Components/Navbar";
 import Tabla from "./Components/Tabla";
+import { auth } from "./db/firebase";
 
 const App = () => {
-  return (
+  const [firebaseUser, setFirebaseUser] = useState(false);
+
+  useEffect(() => {
+    auth.onAuthStateChanged((user) => {
+      console.log(user);
+      if (user) {
+        setFirebaseUser(user);
+      } else {
+        setFirebaseUser(null);
+      }
+    });
+  }, []);
+  return firebaseUser !== false ? (
     <Router>
-      <Navbar />
+      <Navbar firebaseUser={firebaseUser} />
       <div className="container">
         <div className="row">
           <Switch>
             <Route path="/login" exact>
-              <Login/>
+              <Login />
             </Route>
             <Route path="/admin" exact>
               Ruta de administracion
@@ -24,6 +37,8 @@ const App = () => {
         </div>
       </div>
     </Router>
+  ) : (
+    <div>Cargando...</div>
   );
 };
 
