@@ -23,12 +23,7 @@ const Navbar = () => {
           <div className="collapse navbar-collapse" id="navbarNav">
             <ul className="navbar-nav">
               <li className="nav-item">
-                <NavLink
-                  className="nav-link "
-                  aria-current="page"
-                  to="/"
-                  exact
-                >
+                <NavLink className="nav-link " aria-current="page" to="/" exact>
                   Home
                 </NavLink>
               </li>
@@ -38,13 +33,11 @@ const Navbar = () => {
                 </NavLink>
               </li>
               <li className="nav-item">
-                <a className="nav-link" href="#">
-                  Pricing
-                </a>
+                <NavLink className="nav-link" to="/login">
+                  login
+                </NavLink>
               </li>
-              <li className="nav-item">
-                <a className="nav-link disabled">Disabled</a>
-              </li>
+             
             </ul>
           </div>
         </div>
