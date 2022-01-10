@@ -1,6 +1,10 @@
 import React, { useCallback, useState } from "react";
 import loginFirebase from "../db/loginFirebase";
-const Login = () => {
+import { withRouter } from "react-router-dom";
+
+
+
+const Login = (props) => {
   const [email, setemail] = useState("");
   const [pass, setpass] = useState("");
   const [error, seterror] = useState("");
@@ -28,8 +32,11 @@ const Login = () => {
 
   const login = useCallback(async () => {
     try {
-    const data = await loginFirebase.loguearUsuario(email, pass);
-    console.log(data);
+      const data = await loginFirebase.loguearUsuario(email, pass);
+      console.log(data);
+      setemail("");
+      setpass("");
+      props.history.push("/admin");
     } catch (error) {
       console.log(error);
     }
@@ -41,6 +48,7 @@ const Login = () => {
       loginFirebase.coleecionUser(data);
       setemail("");
       setpass("");
+      props.history.push("/admin");
     } catch (error) {
       console.log(error);
     }
@@ -97,4 +105,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default withRouter(Login);
