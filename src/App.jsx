@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import Admin from "./Components/Admin";
 import Login from "./Components/Login";
 import Navbar from "./Components/Navbar";
 import Tabla from "./Components/Tabla";
@@ -28,7 +29,7 @@ const App = () => {
               <Login />
             </Route>
             <Route path="/admin" exact>
-              Ruta de administracion
+              <Admin/>
             </Route>
             <Route path="/" exact>
               <Tabla />

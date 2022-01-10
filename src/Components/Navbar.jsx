@@ -1,7 +1,14 @@
 import React from "react";
 import { Link, NavLink } from "react-router-dom";
+import { auth } from "../db/firebase";
+import { withRouter } from "react-router-dom";
 
-const Navbar = () => {
+const Navbar = (props) => {
+  const cerrarSesion = () => {
+    auth.signOut().then(() => {
+      props.history.push("/login");
+    });
+  };
   return (
     <div id="Navbar">
       <nav className="navbar navbar-expand-lg navbar-dark  bg-primary">
@@ -32,12 +39,18 @@ const Navbar = () => {
                   Admin
                 </NavLink>
               </li>
-              <li className="nav-item">
-                <NavLink className="nav-link" to="/login">
-                  login
-                </NavLink>
-              </li>
-             
+
+              {props.firebaseUser !== null ? (
+                <button className="btn btn-dark" onClick={() => cerrarSesion()}>
+                  Cerrar Sesión
+                </button>
+              ) : (
+                <li className="nav-item">
+                  <NavLink className="nav-link" to="/login">
+                    login
+                  </NavLink>
+                </li>
+              )}
             </ul>
           </div>
         </div>
@@ -46,4 +59,4 @@ const Navbar = () => {
   );
 };
 
-export default Navbar;
+export default withRouter(Navbar);
